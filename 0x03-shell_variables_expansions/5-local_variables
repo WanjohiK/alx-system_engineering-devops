@@ -1,2 +1,2 @@
 #!/bin/bash
-compgen -v | while read var; do declare -p $var; done; declare -f
+compgen -v; compgen -A function
