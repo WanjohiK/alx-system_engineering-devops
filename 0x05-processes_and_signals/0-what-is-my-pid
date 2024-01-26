@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#Bash script that displays its own PID.
+
+#method 1 # echo "$$" | pgrep bash | awk '{print $1}'
+#method 2 ps | pgrep bash | awk '{print $1}'
+#mehod 3
+echo "$$"
