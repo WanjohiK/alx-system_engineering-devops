@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#set up a basic firewall using Uncomplicated Firewall (UFW) on a Linux system
+
+# install the UFW
+sudo apt-get -y install ufw
+
+#deny incoming trafic
+sudo ufw default deny incoming
+
+# allow outgoing trafic
+sudo default allow ougoing
+
+#allows incoming traffic on port 22, which is typically used for SSH (Secure Shell) connections
+sudo ufw allow 22/tcp
+
+#allows incoming TCP traffic on port 80, which is the default port for HTTP web traffic
+sudo ufw allow 80/tcp
+
+#allows incoming TCP traffic on port 443, which is the default port for HTTPS web traffic
+sudo ufw allow 443/tcp
+
+#enable UFW
+sudo ufw enable
+
+# check status
+sudo ufw status verbose
