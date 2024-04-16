@@ -1,0 +1,62 @@
+# VI INTO /ETC/MYSQL/MYSQL.CONFIG.D/MYSQLL=D.CNF
+# add by default to only allow connections from local host
+#bind address 127.0.0.1
+#give your servers id
+server-id = 1 #master
+log_bin = /var/log/mysql/mysql-bin.log
+# where they get the data
+binlog_do_db = db_name
+
+sudo ufw status
+#enale incoming connections to port 3306 and restart server
+sudo ufw allow from 'replica_server_ip) to any port 3306
+
+sudo service mysql restart
+
+#log to mysqldb and lock db and prepare binary file for relication
+
+mysql -uroot -p
+
+FLUSH TABLES WITH READ LOCK;
+mysql> SHOW MASTER STATUS;
+
+#shows the file and position
+
+#slave configuration
+use install_mysql file to instal on web 2
+
+#copy the database from web1 to we 2 use secure copy (scp) you need an ssh key then copy to server then move to web 2
+ssh-keygen -f ~/ .ssh/server_key
+copy server_key.pub into /.ssh/authorized.keys 
+
+#perform dump into the web in a .sql file
+mysqldump -uroot -p 'table' > '.sql file'
+
+#copy .sql fileto server 2
+scp -i ~/.ssh/server_key .sqlfile ubuntu@web2 ip: ~
+
+mysql -uroot -p
+ mysql> CREATE DATABAE  db_name;
+
+mysql -uroot -p db_name < export_db_name.sql
+
+edit config files server -1d =2
+
+#Configure replication using the information obtained from the master server (replace placeholders with actual values):
+CHANGE MASTER TO
+  MASTER_HOST = 'master_host',
+  MASTER_USER = 'replica_user',
+  MASTER_PASSWORD = 'replica_password',
+  MASTER_LOG_FILE = 'log_file_from_master',
+  MASTER_LOG_POS = log_position_from_master;
+
+#Start Replication:
+START SLAVE;
+
+#Check Slave Status:
+SHOW SLAVE STATUS\G;
+
+#Unlock Tables (Optional):
+
+#If you locked tables on the master server earlier, unlock them on the slave server:
+UNLOCK TABLES;

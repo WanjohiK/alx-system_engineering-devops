@@ -1,0 +1,14 @@
+# check status
+sudo service mysql status
+
+#log in to mysql
+mysql -uroot -p
+
+#create user
+CREATE USER IF NOT EXISTS 'holberton_user'@'localhost' IDENTIFIED BY 'projectcorrection280hbtn';
+
+#grant all privilages
+GRANT REPLICATION CLIENT ON *.* to 'holberton_user'@'localhost';
+
+#check users
+SELECT user FROM mysql.user;

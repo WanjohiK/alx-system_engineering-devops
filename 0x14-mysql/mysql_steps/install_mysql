@@ -1,0 +1,25 @@
+# update server
+sudo apt update
+
+#list apps including mysql
+apt list | grep mysql-server
+
+#Copy the key here to your clipboard
+
+#https://dev.mysql.com/doc/refman/5.7/en/checking-gpg-signature.html
+
+#Save it in a file on your machine i.e. signature.key and then
+#public key  signature.key
+sudo apt-key add signature.key
+
+#add the apt repo
+sudo sh -c 'echo "deb http://repo.mysql.com/apt/ubuntu bionic mysql-5.7" >> /etc/apt/sources.list.d/mysql.list'
+
+#update apt
+sudo apt-get update
+
+#check your available versions:
+sudo apt-cache policy mysql-server
+
+# install version 5.7x
+sudo apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
